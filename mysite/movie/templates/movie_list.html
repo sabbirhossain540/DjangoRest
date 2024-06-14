@@ -1,0 +1,39 @@
+<h1>Movie List</h1>
+<table dir="ltr" width="500" border="1" 
+			summary="purpose/structure for speech output">
+	<caption>Here is the total number of movie
+	</caption>
+	<colgroup width="50%" />
+	<colgroup id="colgroup" class="colgroup" align="center" 
+			valign="middle" title="title" width="1*" 
+			span="2" style="background:#ddd;" />
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Duration</th>
+			<th scope="col">Rating</th>
+		</tr>
+	</thead>
+
+	<tbody>
+        {% for movieitem in movie_objects %}
+		<tr>
+			<td>{{ movieitem.name }}</td>
+			<td>{{ movieitem.duration }}</td>
+			<td>{{ movieitem.rating }}</td>
+		</tr>
+        {% endfor %}
+	</tbody>
+</table>
+
+{% if movie_objects.has_previous %}
+    <a href="?page=1">First</a>
+    <a href="?page={{ movie_objects.previous_page_number }}">Previous</a>
+{% endif %}
+
+Page: {{ movie_objects.number }} of {{ movie_objects.num_pages }}
+
+{% if movie_objects.has_next %}
+    <a href="?page={{ movie_objects.next_page_number }}">Next</a>
+    <a href="?page={{ movie_objects.num_pages}}">Last</a>
+{% endif %}
