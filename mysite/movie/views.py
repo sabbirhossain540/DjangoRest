@@ -8,7 +8,12 @@ from django.core.paginator import Paginator
 
 def movie_list(request):
     movies_object = MovieData.objects.all()
-    paginator = Paginator(movies_object, 1)
+
+    movie_name = request.GET.get('movie_name')
+    if movie_name != '' and movie_name is not None:
+        movies_object = movies_object.filter(name__icontains = movie_name)
+    
+    paginator = Paginator(movies_object, 3)
     page = request.GET.get('page')
     movies_object = paginator.get_page(page)
 
